@@ -1,0 +1,741 @@
+div {
+  outline: none !important;
+}
+
+.blur {
+  filter: blur(4px);
+}
+
+.App {
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  text-align: center;
+  width: 100%;
+  
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+}
+
+.App-inner {
+  max-width: 30em;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.App-content {
+  position: absolute;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  width: 100%;
+}
+
+.App-header-rules {
+  background: #fffa;
+  z-index: 10;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  max-width: 30em;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  color: white;
+  box-shadow: 0px 60px 60px rgba(0,0,0,.8);
+}
+
+.App-header-rules-hidden {
+  display: none;
+}
+
+.toast-rules {
+  position: relative;
+  min-height: 70vh;
+  width: 100%;
+}
+
+.closeRules {
+  cursor: pointer;
+  font-weight: bolder;
+  position: fixed;
+  top: 0;
+  right: 0.25em;
+  font-family: Future;
+  font-size: 3em;
+  color: white;
+  z-index: 20;
+}
+
+.closeRules-hidden {
+  display: none;
+}
+
+.rules {
+  position: absolute;
+  background-color: #444444ab;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.App-logo {
+  pointer-events: none;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .game-border.rotating {
+    animation: game-border-spin infinite 31s linear;
+  }
+
+  .dirt-border.rotating {
+    animation: game-border-spin infinite 31s linear;
+  }
+
+  .sq-1 {
+    animation: sq2-spin infinite .6s linear;
+    animation-direction: alternate-reverse;
+  }
+
+  .sq-2 {
+    animation: sq2-spin infinite .6s linear;
+    animation-direction: alternate;
+  }
+
+  .sq-1-rules {
+    animation: sq2-spin infinite .6s linear;
+    animation-direction: alternate-reverse;
+  }
+
+  .sq-2-rules {
+    animation: sq2-spin infinite .6s linear;
+    animation-direction: alternate;
+  }
+
+  .sq4 {
+    animation: shimmer 2s infinite linear;
+  }
+
+  .sq4-rules {
+    animation: shimmer 2s infinite linear;
+  }
+}
+
+.App-header {
+  background-color: #ffffffc4;
+  min-height: 5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-top: 3%;
+  width: 100%;
+}
+
+.game {
+  background-color: #ffffffc4;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.ocean-border {
+  border-radius: 40% 20% 10% 80% / 30% 80% 20% 20%;
+  position: absolute;
+  width: 90%;
+  display: flex;
+  background: radial-gradient(ellipse at 35% 30%, #0cf 0%, #0033dddd 70%);
+  filter: blur(100px);
+  flex-direction: column;
+  aspect-ratio: 1 / 1;
+}
+
+.game-border {
+  position: relative;
+  width: 70%;
+  aspect-ratio: 1 / 1;
+  background: radial-gradient(ellipse at 35% 30%, white 0%, #58b1fa 90%);
+  border-radius: 40% 20% 1% 70% / 3% 80% 1% 50%;
+  box-shadow: 0px 60px 60px rgba(0,0,0,.8);
+}
+
+.dirt-border {
+  position: absolute;
+  width: 50%;
+  aspect-ratio: 1 / 1;
+  background: radial-gradient(ellipse at 35% 30%, white 0%, rgb(40, 177, 219) 90%);
+  border-radius: 40% 20% 10% 80% / 30% 80% 20% 20%;
+  box-shadow: 0px 60px 60px rgba(0,0,0,.8);
+}
+
+.controls {
+  position: absolute;
+  width: 90%;
+  display: flex;
+  background: transparent;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+}
+
+.control-up {
+  border-radius: 100% 100% 35% 35% / 100%;
+  width: 8%;
+  background: radial-gradient(ellipse at 50% 30%, white 0%, #bbbd 90%);
+  filter: blur(5px);
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+}
+
+.control-down {
+  border-radius: 100% 100% 35% 35% / 100%;
+  width: 8%;
+  background: radial-gradient(ellipse at 50% 30%, white 0%, #bbbd 90%);
+  filter: blur(5px);
+  aspect-ratio: 1 / 1;
+  transform: rotate(180deg);
+  cursor: pointer;
+}
+
+.control-left {
+  border-radius: 100% 35% 35% 100% / 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at 30% 50%, white 0%, #bbbd 90%);
+  filter: blur(5px);
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+}
+
+.control-right {
+  border-radius: 100% 35% 35% 100% / 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at 30% 50%, white 0%, #bbbd 90%);
+  filter: blur(5px);
+  aspect-ratio: 1 / 1;
+  transform: rotate(180deg);
+  cursor: pointer;
+}
+
+.control-spacer {
+  width: 8%;
+  background-color: transparent;
+  aspect-ratio: 1 / 1;
+}
+
+.control-spacer-row {
+  height: 100%;
+  background-color: transparent;
+  aspect-ratio: 1 / 1;
+}
+
+.control-spacer-middle {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: transparent;
+  height: 7.7%;
+}
+
+.game-board {
+  position: absolute;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: 1 / 1;
+}
+
+.App-footer {
+  background-color: #ffffffc4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-top: 5vh;
+  width: 90%;
+}
+
+.App-footer-copyright {
+  background-color: #ffffffc4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  width: 100%;
+  height: 100%;
+}
+
+.App-setting-label-copyright {
+  color: black;
+  font-size: 0.7em;
+}
+
+@keyframes game-border-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes sq2-spin {
+  from {
+    transform: rotate(-5deg);
+  }
+  to {
+    transform: rotate(5deg);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 0%;
+  }
+  to {
+    background-position: 300%;
+  }
+}
+
+body {
+  background: #fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  z-index: 1;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  background: radial-gradient(ellipse at center top, #88BB11 0%, #447711 65%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+h2 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+h3 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+h4 {
+  margin-top: 0;
+  font-size: 16px;
+}
+
+h5 {
+  margin-top: 0;
+  font-size: 14px;
+}
+
+h6 {
+  margin-top: 0;
+  font-size: 12px;
+}
+
+ul {
+  padding-inline-start: 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.grid-cell {
+  float: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.square {
+  height: 95%;
+  aspect-ratio: 1 / 1;
+}
+
+.sq1 {
+  border-radius: 40% 20% 1% 70% / 3% 80% 1% 50%;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #a7fffcdd;
+  background: linear-gradient(135deg, #cffffddd 0%, #a7fffcdd 10%, #0dd3c9 60%, #0033dddd 100%);
+  box-shadow: 0px 10px 10px  #0dd3c9;
+  cursor: pointer;
+}
+
+.sq-1 {
+  border-radius: 40% 20% 1% 70% / 3% 80% 1% 50%;
+  border-style: solid;
+  border-color: white;
+  background: linear-gradient(135deg, #cffffddd 0%, #a7fffcdd 10%, #0dd3c9 60%, #0033dddd 100%);
+  box-shadow: 0px 10px 10px  #00b3aadd;
+  cursor: pointer;
+}
+
+.sq2 {
+  border-radius: 30% 10% 20% 60% / 80% 20% 30% 20%;
+  border-style: solid;
+  border-color: #0044eebb;
+  background: radial-gradient(ellipse at 35% 30%, #0cf 0%, #0033dddd 70%);
+  box-shadow: 0px 30px 30px #03dd;
+  cursor: pointer;
+}
+
+.sq-2 {
+  border-radius: 30% 10% 20% 60% / 80% 20% 30% 20%;
+  border-style: solid;
+  border-color: white;
+  background: radial-gradient(ellipse at 35% 30%, white 0%, #0033dddd 70%);
+  box-shadow: 0px 30px 30px #03dd;
+  cursor: pointer;
+}
+
+.sq0 {
+  vertical-align: middle;
+  border-radius:30% 30% 50% 30%;
+  border-style: none;
+  border-width: 1px;
+  border-color: #00559955;
+  background: radial-gradient(ellipse at 35% 30%, #ffa3fabb 0%, #f25effbb 70%);
+  box-shadow: 0px 30px 30px #003cff;
+  height: 50%;
+  aspect-ratio: 1 / 1;
+  cursor: auto;
+}
+
+.sq3 {
+  background: transparent;
+}
+
+.sq4 {
+  height: 100%;
+  border-radius: 0%;
+  border-style: solid;
+  border-width: .1px;
+  border-color: #fffa;
+  background: linear-gradient(135deg, transparent 30%, #fafafa 50%, transparent 30%);
+  background-size: 300%;
+  box-shadow: 0px 30px 30px #ddd4;
+}
+
+.board-row {
+  width: 100%;
+  display: flex;
+  flex: 1;
+}
+
+.board-row:after {
+  clear: both;
+  content: '';
+  display: table;
+}
+
+.app-title {
+  font-size: 3em;
+}
+
+.App-setting {
+  display: table;
+  flex: 1;
+}
+
+.App-settings {
+  margin-top: 2vh;
+  display: flex;
+  flex-direction: column;
+  align-items: right;
+  justify-content: right;
+  width: 70%;
+}
+
+.app-setting-title {
+  margin-top: 0.5em;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  font-size: 3em;
+}
+
+.app-setting-subtitle {
+  color: black;
+  font-family: Future;
+  margin-top: 0.5em;
+  margin-left: 1em;
+  margin-right: 1em;
+  font-size: 2em;
+}
+
+.app-setting-desc {
+  color: #000;
+  font-family: Future;
+  margin-top: 1em;
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-bottom: 0.5em;
+  font-size: 1.2em;
+}
+
+.App-settings-buttons {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.App-settings-buttons .App-setting {
+  margin: 0.5em;
+}
+
+.App-setting-hidden {
+  display: none;
+}
+
+.app-setting-label {
+  font-family: Future;
+  font-size: 3vh;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.App-setting-button {
+  border-radius: 10%;
+  background: radial-gradient(ellipse at 35% 30%, #0cf 0%, #0033dddd 70%);
+  padding: 10px;
+  box-shadow: 10px 10px 10px #000;
+  cursor: pointer;
+}
+
+.App-setting-button-play {
+  border-radius: 10%;
+  background: radial-gradient(ellipse at 35% 30%, white 0%, #223011 90%);
+  padding: 10px;
+  box-shadow: 10px 10px 10px #000;
+  cursor: pointer;
+}
+
+.App-setting-button-rules {
+  border-radius: 10%;
+  background: radial-gradient(ellipse at 35% 30%, #ddaa00 0%, #aa6600 70%);
+  padding: 10px;
+  box-shadow: 10px 10px 10px #000;
+  cursor: pointer;
+}
+
+.App-setting-button-play-disabled {
+  filter: blur(0.5vh);
+  pointer-events: none;
+  color: #888;
+  border-radius: 10%;
+  background: radial-gradient(ellipse at 35% 30%, white 0%, #ccc 90%);
+  padding: 10px;
+  box-shadow: 10px 10px 10px #000;
+}
+
+.App-setting-button-store {
+  border-radius: 10%;
+  background: radial-gradient(ellipse at 35% 30%, white 0%, #0a5f3e 90%);
+  padding: 10px;
+  box-shadow: 10px 10px 10px #000;
+  cursor: pointer;
+}
+
+.App-setting-button-recall {
+  border-radius: 10%;
+  background: radial-gradient(ellipse at 35% 30%, white 0%, #d8700f 90%);
+  padding: 10px;
+  box-shadow: 10px 10px 10px #000;
+  cursor: pointer;
+}
+
+.App-setting-button-recall-disabled {
+  filter: blur(0.5vh);
+  pointer-events: none;
+  color: #888;
+  border-radius: 10%;
+  background: radial-gradient(ellipse at 35% 30%, white 0%, #ccc 90%);
+  padding: 10px;
+  box-shadow: 10px 10px 10px #000;
+}
+
+.App-setting-button-clear {
+  border-radius: 10%;
+  background: radial-gradient(ellipse at 35% 30%, white 0%, #ff0707 90%);
+  padding: 10px;
+  box-shadow: 10px 10px 10px #000;
+  cursor: pointer;
+}
+
+.App-setting-button-rotate {
+  border-radius: 1vw;
+  padding: 10px;
+  box-shadow: 10px 10px 10px #000;
+  background: radial-gradient(ellipse at 35% 30%, white 0%, #aaa 90%);
+  cursor: pointer;
+}
+
+.engraved {
+  font-family: Futura;
+  background-color: #000;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: #444444ab 5px 7px 1px;
+}
+
+.App-setting-button-label {
+  font-family: Futura;
+  background-color: #333;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  color: black;
+  cursor: pointer;
+}
+
+.rule-desc {
+  font-family: Future;
+}
+
+.sq0-rules {
+  margin-right: 1vh;
+  margin-left: 1vh;
+  vertical-align: middle;
+  border-radius:30% 30% 50% 30%;
+  border-style: none;
+  border-width: 1px;
+  border-color: #00559955;
+  background: radial-gradient(ellipse at 35% 30%, #ffa3fabb 0%, #f25effbb 70%);
+  box-shadow: 0px 30px 30px #ffa3fabb;
+  height: 50%;
+  aspect-ratio: 1 / 1;
+  height: 5vh;
+  aspect-ratio: 1 / 1;
+}
+
+.sq1-rules {
+  margin-right: 1vh;
+  margin-left: 1vh;
+  border-radius: 40% 20% 1% 70% / 3% 80% 1% 50%;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #a7fffcdd;
+  background: linear-gradient(135deg, #cffffddd 0%, #a7fffcdd 10%, #0dd3c9 60%, #0033dddd 100%);
+  box-shadow: 0px 10px 10px  #0dd3c9;
+  width: 10vh;
+  aspect-ratio: 1 / 1;
+}
+
+.sq-1-rules {
+  margin-right: 1vh;
+  margin-left: 1vh;
+  border-radius: 40% 20% 1% 70% / 3% 80% 1% 50%;
+  border-style: solid;
+  border-color: white;
+  background: linear-gradient(135deg, #cffffddd 0%, #a7fffcdd 10%, #0dd3c9 60%, #0033dddd 100%);
+  box-shadow: 0px 10px 10px  #00b3aadd;
+  width: 10vh;
+  aspect-ratio: 1 / 1;
+}
+
+.sq-2-rules {
+  margin-right: 1vh;
+  margin-left: 1vh;
+  border-radius: 30% 10% 20% 60% / 80% 20% 30% 20%;
+  border-style: solid;
+  border-color: white;
+  background: radial-gradient(ellipse at 35% 30%, white 0%, #0033dddd 70%);
+  box-shadow: 0px 30px 30px #03dd;
+  width: 10vh;
+  aspect-ratio: 1 / 1;
+}
+
+.sq4-rules {
+  margin-right: 1vh;
+  margin-left: 1vh;
+  width: 10vh;
+  aspect-ratio: 1 / 1;
+  height: 100%;
+  border-radius: 0%;
+  border-style: solid;
+  border-width: .1px;
+  border-color: #fffa;
+  background: linear-gradient(135deg, transparent 30%, #fafafa 50%, transparent 30%);
+  background-size: 300%;
+  box-shadow: 0px 30px 30px #ddd4;
+}
+
+.control-up-rules {
+  margin-right: 1vh;
+  margin-left: 1vh;
+  border-radius: 100% 100% 35% 35% / 100%;
+  width: 8vh;
+  background: radial-gradient(ellipse at 50% 30%, white 0%, #bbbd 90%);
+  filter: blur(5px);
+  aspect-ratio: 1 / 1;
+}
+
+.control-down-rules {
+  margin-right: 1vh;
+  margin-left: 1vh;
+  border-radius: 100% 100% 35% 35% / 100%;
+  width: 8vh;
+  background: radial-gradient(ellipse at 50% 30%, white 0%, #bbbd 90%);
+  filter: blur(5px);
+  aspect-ratio: 1 / 1;
+  transform: rotate(180deg);
+}
+
+.control-left-rules {
+  margin-right: 1vh;
+  margin-left: 1vh;
+  border-radius: 100% 35% 35% 100% / 100%;
+  width: 8vh;
+  background: radial-gradient(ellipse at 30% 50%, white 0%, #bbbd 90%);
+  filter: blur(5px);
+  aspect-ratio: 1 / 1;
+}
+
+.control-right-rules {
+  margin-right: 1vh;
+  margin-left: 1vh;
+  border-radius: 100% 35% 35% 100% / 100%;
+  width: 8vh;
+  background: radial-gradient(ellipse at 30% 50%, white 0%, #bbbd 90%);
+  filter: blur(5px);
+  aspect-ratio: 1 / 1;
+  transform: rotate(180deg);
+}
