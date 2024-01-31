@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/xollect-react/static/css/main.cf0ca8d7.css",
+    "main.css": "/xollect-react/static/css/main.1a54812e.css",
     "main.js": "/xollect-react/static/js/main.f0b1e4df.js",
     "static/js/787.13883f6f.chunk.js": "/xollect-react/static/js/787.13883f6f.chunk.js",
     "index.html": "/xollect-react/index.html",
-    "main.cf0ca8d7.css.map": "/xollect-react/static/css/main.cf0ca8d7.css.map",
+    "main.1a54812e.css.map": "/xollect-react/static/css/main.1a54812e.css.map",
     "main.f0b1e4df.js.map": "/xollect-react/static/js/main.f0b1e4df.js.map",
     "787.13883f6f.chunk.js.map": "/xollect-react/static/js/787.13883f6f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.cf0ca8d7.css",
+    "static/css/main.1a54812e.css",
     "static/js/main.f0b1e4df.js"
   ]
 }
